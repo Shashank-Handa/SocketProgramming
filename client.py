@@ -1,6 +1,5 @@
 from http import client
 import socket
-<<<<<<< HEAD
 serverName="10.0.0.1"
 serverPort="12000"
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as clientSocket:
@@ -21,17 +20,3 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as clientSocket:
     clientSocket.send(img)
 
     clientSocket.close()
-=======
-serverName="10.0.2.5"
-serverPort=12000
-clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-clientSocket.connect((serverName, serverPort))
-
-sentence=input("enter file path :")
-
-clientSocket.send(sentence.encode())
-
-modified=clientSocket.recv(1024)
-print("from server: ", modified.decode())
-clientSocket.close()
->>>>>>> c02d1589c1f784473ee128c603bf0790d1acb4f1
