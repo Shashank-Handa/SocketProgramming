@@ -1,7 +1,7 @@
 from http import client
 import socket
 serverName="10.0.0.1"
-serverPort="12000"
+serverPort=12000
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as clientSocket:
     clientSocket.connect((serverName, serverPort))
 
