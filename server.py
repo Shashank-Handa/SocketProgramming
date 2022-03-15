@@ -1,6 +1,6 @@
 import socket
-from os import remove
-import PIL
+import os
+from imgcompression import compress
 serverPort = 12000
 serverSocket =socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serverSocket.bind(('',serverPort))
@@ -8,15 +8,22 @@ serverSocket.listen(1)
 print("Server is running")
 while True:
     connectionSocket, addr = serverSocket.accept()
-    filepath = connectionSocket.recv(1024).decode()
 
-    myfile=open("1"+filepath, "wb")
-    
-    img=connectionSocket.recv(1024)
+    filepath="temp"
+    filepath="1"+filepath
+    myfile=open(filepath, "wb")
+    print("opened")
 
-    myfile.write(img)
+    img=connectionSocket.recv(470000)
+    while(img!=b''): 
+        myfile.write(img)
+        img=connectionSocket.recv(470000)
     myfile.close()
 
-    imgfile=PIL.Image.open("1"+filepath)
+    filepath=compress(filepath)
 
+    myfile=open(filepath, "rb")
+    connectionSocket.send(myfile)
+
+    print("done")
     connectionSocket.close()

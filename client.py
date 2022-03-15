@@ -18,6 +18,25 @@ while(i!=1):
         i=0
 img=imgfile.read()
 
-clientSocket.send((filepath+">").encode())
+filepath=""
+#accept file path and open file
+filepath=input("enter file path")
+i=0
+while(i!=1):
+    try:
+        i=1
+        img=open(filepath, 'rb');
+    except:
+        print("file does not exist")
+        i=0
 
 clientSocket.send(img)
+
+optimizedImage=open("optimized"+filepath,"wb")
+img2=clientSocket.recv(470000)
+while(img!=b''): 
+    optimizedImage.write(img2)
+    img2=clientSocket.recv(470000)
+optimizedImage.close()
+
+clientSocket.close()
