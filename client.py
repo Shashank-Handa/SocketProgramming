@@ -16,7 +16,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as clientSocket:
             print("file does not exist")
             i=0
     
-    clientSocket.send(filepath.encode())
     clientSocket.send(img)
+
+    optimizedImage=open("optimized"+filepath,"wb")
+    img2=clientSocket.recv(470000)
+    while(img!=b''): 
+        optimizedImage.write(img2)
+        img2=clientSocket.recv(470000)
+    optimizedImage.close()
 
     clientSocket.close()
