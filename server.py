@@ -20,10 +20,12 @@ while True:
         img=connectionSocket.recv(470000)
     myfile.close()
 
-    filepath=compress(filepath)
+    filepath2=compress(filepath)
 
     myfile=open(filepath, "rb")
     connectionSocket.send(myfile)
 
     print("done")
+    os.remove(filepath)
+    os.remove(filepath2)
     connectionSocket.close()
