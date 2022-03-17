@@ -58,7 +58,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as serverSocket:
 
     socketserver.TCPServer.allow_reuse_address=True
     serverSocket.bind(('',serverPort))
-    serverSocket.listen(1)
+    serverSocket.listen(4)
     print("Server is running")
     ThreadCount=0
     while True:
