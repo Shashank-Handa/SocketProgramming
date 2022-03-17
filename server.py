@@ -4,6 +4,7 @@ import os
 import socketserver
 from imgcompression import compress
 import threading
+import time
 
 def multiClientHandler(connectionSocket):
             ThreadId=threading.get_ident()
@@ -42,11 +43,13 @@ def multiClientHandler(connectionSocket):
                 charsize=str(size)
                 connectionSocket.send((charsize+">").encode())
                 connectionSocket.sendall(img2)
+                myfile.close()
 
                 print(ThreadId, "image file sent")
                 print(ThreadId, "Closing connection with client")
 
             connectionSocket.close()
+
             os.remove(filepath)
             os.remove(filepath2)
             
