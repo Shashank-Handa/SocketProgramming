@@ -20,7 +20,7 @@ def multiClientHandler(connectionSocket):
                     j=connectionSocket.recv(1).decode()
                     charsize=charsize+j
                 size=int(charsize[0:-1])
-                print("recieved image size: ", size)
+                print(ThreadId, ":recieved image size: ", size)
 
                 #loop to recieve image
                 with open(filepath, "wb") as myfile:
@@ -29,11 +29,11 @@ def multiClientHandler(connectionSocket):
                         temp=connectionSocket.recv(128000)
                         img=img+temp
                     myfile.write(img)
-                print("recieved image")
+                print(ThreadId, "recieved image")
 
                 #Compressing image file
                 filepath2=compress(filepath)
-                print("image compressed")
+                print(ThreadId, "image compressed")
 
                 #sending compressed image
                 myfile=open(filepath2, "rb")
@@ -43,8 +43,8 @@ def multiClientHandler(connectionSocket):
                 connectionSocket.send((charsize+">").encode())
                 connectionSocket.sendall(img2)
 
-                print("image file sent")
-                print("Closing connection with client")
+                print(ThreadId, "image file sent")
+                print(ThreadId, "Closing connection with client")
 
             connectionSocket.close()
             os.remove(filepath)
