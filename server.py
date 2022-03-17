@@ -4,7 +4,6 @@ import os
 import socketserver
 from imgcompression import compress
 import threading
-import time
 
 def multiClientHandler(connectionSocket):
             ThreadId=threading.get_ident()
