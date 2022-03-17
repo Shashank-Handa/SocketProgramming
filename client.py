@@ -1,7 +1,6 @@
 from http import client
 from pydoc import cli
 import socket
-import math
 serverName="10.0.2.5"
 serverPort=12000
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as clientSocket:
